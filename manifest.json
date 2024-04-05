@@ -1,12 +1,12 @@
 {
     "manifest_version": 3,
-    "name": "Undergrad Calendar Extension",
-    "description": "For UWaterloo undergrad calendar",
+    "name": "UWaterloo Undergrad Calendar Checklist",
+    "description": "UWaterloo Undergrad Calendar Checklist",
     "version": "1.0",
     "action": {
       "default_popup": "popup.html"
     },
-    "permissions": ["activeTab", "scripting", "tabs", "storage"],
+    "permissions": ["storage"],
     "content_scripts": [
         {
             "matches": ["*://uwaterloo.ca/academic-calendar/undergraduate-studies/*", "*://academic-calendar-archive.uwaterloo.ca/undergraduate-studies/*"],
