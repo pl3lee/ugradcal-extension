@@ -21,10 +21,5 @@ jobs:
       run: |
         npm install -g chrome-webstore-upload-cli
     - name: Upload
-      run: |-
-          chrome-webstore-upload upload \\
-            --source dist/ugradcal-extension.zip \\
-            --extension-id mjpocjjaabfokchanbjjppajmgcnlhfn \\
-            --client-id ${{ secrets.GOOGLE_CLIENT_ID }} \\
-            --client-secret ${{ secrets.GOOGLE_CLIENT_SECRET }} \\
-            --refresh-token ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+      run: |
+          chrome-webstore-upload upload --source dist/ugradcal-extension.zip --extension-id mjpocjjaabfokchanbjjppajmgcnlhfn --client-id ${{ secrets.GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.GOOGLE_REFRESH_TOKEN }}
