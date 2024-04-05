@@ -47,11 +47,18 @@ function addCheckboxAndHighlight(courseText) {
 
     let checkbox = courseText.nextSibling;
     if (!checkbox || checkbox.type !== 'checkbox') {
+        checkboxContainer = document.createElement('div');
+        checkboxContainer.style.display = 'inline-flex';
+        checkboxContainer.style.alignItems = 'center';
+        checkboxContainer.style.justifyContent = 'center';
+        checkboxContainer.style.marginRight = '5px';
+        checkboxContainer.style.marginLeft = '5px';
         checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.checked = true;
         checkbox.addEventListener('change', () => toggleHighlight(courseText, checkbox.checked));
-        courseText.parentNode.insertBefore(checkbox, courseText.nextSibling);
+        checkboxContainer.appendChild(checkbox);
+        courseText.parentNode.insertBefore(checkboxContainer, courseText.nextSibling);
     }
 }
 

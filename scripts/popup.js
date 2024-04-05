@@ -1,19 +1,31 @@
 // Get the input element
-var input = document.getElementById('courses');
-var enableButton = document.getElementById('toggle');
+const input = document.getElementById('courses')
+const enableButton = document.getElementById('toggle')
+const statusSpan = document.getElementById('status')
+
 // Check if there's a saved value in localStorage
 chrome.storage.local.get("courses", function(result) {
-    if(result.courses !== undefined) {
+    if(result.courses != undefined) {
         // Set the value of the input to the saved value
-        input.value = result.courses;
+        if (result.courses.trim() === "") {
+            input.value = ""
+        } else {
+            input.value = result.courses;
+        }
+        
     } else {
         chrome.storage.local.set({courses: ''})
     }
 })
 
 chrome.storage.local.get("enabled", function(result) {
-    if (!result) {
+    if (!result.enabled) {
         chrome.storage.local.set({enabled: false})
+        statusSpan.style.color = 'red'
+        statusSpan.innerText = 'Disabled'
+    } else {
+        statusSpan.style.color = 'green'
+        statusSpan.innerText = 'Enabled'
     }
 })
 
@@ -29,8 +41,12 @@ enableButton.addEventListener('click', function() {
     chrome.storage.local.get("enabled", function(result) {
         if(result.enabled) {
             chrome.storage.local.set({enabled: false})
+            statusSpan.style.color = 'red'
+            statusSpan.innerText = 'Disabled'
         } else {
             chrome.storage.local.set({enabled: true})
+            statusSpan.style.color = 'green'
+            statusSpan.innerText = 'Enabled'
         }
     })
 })
