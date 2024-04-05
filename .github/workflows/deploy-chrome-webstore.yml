@@ -1,0 +1,25 @@
+name: Publish
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Publish webextension
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: |
+        rm /dist/ugradcal-extension.zip
+        zip -r /dist/ugradcal-extension.zip ./*
+    - name: Upload & release
+      uses: mnao305/chrome-extension-upload@v5.0.0
+      with:
+        file-path: dist/ugradcal-extension.zip
+        extension-id: mjpocjjaabfokchanbjjppajmgcnlhfn
+        client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
+        client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        refresh-token: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
