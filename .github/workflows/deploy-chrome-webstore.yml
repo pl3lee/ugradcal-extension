@@ -16,10 +16,10 @@ jobs:
         node-version: "18"
     - name: Build
       run: |
-        zip -r dist/ugradcal-extension.zip ./*
+        zip -r ${{ github.workspace }}/dist/ugradcal-extension.zip ./*
     - name: Install webstore cli
       run: |
         npm install -g chrome-webstore-upload-cli
     - name: Upload
       run: |
-          chrome-webstore-upload upload --source dist/ugradcal-extension.zip --extension-id mjpocjjaabfokchanbjjppajmgcnlhfn --client-id ${{ secrets.GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          chrome-webstore-upload upload --source ${{ github.workspace }}/dist/ugradcal-extension.zip --extension-id mjpocjjaabfokchanbjjppajmgcnlhfn --client-id ${{ secrets.GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.GOOGLE_REFRESH_TOKEN }}
