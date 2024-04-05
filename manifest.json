@@ -1,4 +1,9 @@
 {
+    "browser_specific_settings": {
+        "gecko": {
+          "id": "billy.pl.lee@gmail.com"
+        }
+    },  
     "manifest_version": 3,
     "name": "UWaterloo Undergrad Calendar Checklist",
     "description": "UWaterloo Undergrad Calendar Checklist",
