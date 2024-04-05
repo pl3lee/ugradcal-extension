@@ -3,7 +3,7 @@ var input = document.getElementById('courses');
 var enableButton = document.getElementById('toggle');
 // Check if there's a saved value in localStorage
 chrome.storage.local.get("courses", function(result) {
-    if(result) {
+    if(result.courses !== undefined) {
         // Set the value of the input to the saved value
         input.value = result.courses;
     } else {
