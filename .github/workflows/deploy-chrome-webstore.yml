@@ -1,0 +1,25 @@
+name: Publish
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Publish webextension
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "18"
+    - name: Build
+      run: |
+        zip -r ${{ github.workspace }}/dist/ugradcal-extension.zip ./*
+    - name: Install webstore cli
+      run: |
+        npm install -g chrome-webstore-upload-cli
+    - name: Upload
+      run: |
+          chrome-webstore-upload upload --source ${{ github.workspace }}/dist/ugradcal-extension.zip --extension-id mjpocjjaabfokchanbjjppajmgcnlhfn --client-id ${{ secrets.GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.GOOGLE_REFRESH_TOKEN }}
